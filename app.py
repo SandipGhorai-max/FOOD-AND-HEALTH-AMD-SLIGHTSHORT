@@ -40,7 +40,10 @@ try:
             '\'self\''
         ]
     }
-    Talisman(app, content_security_policy=csp)
+    
+    # Disable force_https if running locally or if Cloud Run proxy handles it
+    is_testing = os.environ.get('TESTING', 'False').lower() == 'true'
+    Talisman(app, content_security_policy=csp, force_https=not is_testing)
 except ImportError:
     logging.warning("Flask-Talisman not installed. Running without strict CSP.")
 

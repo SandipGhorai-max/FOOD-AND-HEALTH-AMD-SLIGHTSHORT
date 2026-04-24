@@ -1,3 +1,5 @@
+import os
+os.environ['TESTING'] = 'true'
 import pytest
 from app import app
 from data import search_talks, TALKS
