@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud Technologies Conference</title>
+    <meta name="description" content="A 1-Day Technical Conference on Google Cloud Technologies.">
+    <!-- Google Fonts for Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Google Cloud Technologies Conference</h1>
+            <p class="event-details">
+                <span class="date" aria-label="Event Date">📅 {{ date }}</span>
+                <span class="location" aria-label="Event Location">📍 {{ location }}</span>
+            </p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <h2>Search Schedule</h2>
+            <div class="search-container">
+                <label for="search-input" class="visually-hidden">Search by category, speaker, or title</label>
+                <input 
+                    type="search" 
+                    id="search-input" 
+                    placeholder="Search by category, speaker, or title..." 
+                    aria-label="Search by category, speaker, or title"
+                >
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <h2>Conference Schedule</h2>
+            <!-- aria-live region to announce updates to screen readers -->
+            <div aria-live="polite" id="schedule-container" class="schedule-container">
+                {% for talk in talks %}
+                    {% if talk.id == 'BREAK' %}
+                        <article class="talk-card break-card">
+                            <div class="time">{{ talk.time }}</div>
+                            <div class="talk-content">
+                                <h3>{{ talk.title }} ☕</h3>
+                                <p class="description">{{ talk.description }}</p>
+                            </div>
+                        </article>
+                    {% else %}
+                        <article class="talk-card">
+                            <div class="time">{{ talk.time }}</div>
+                            <div class="talk-content">
+                                <span class="category-badge">{{ talk.category }}</span>
+                                <h3>{{ talk.title }}</h3>
+                                <p class="description">{{ talk.description }}</p>
+                                <div class="speakers">
+                                    <strong>Speakers:</strong>
+                                    {% for speaker in talk.speakers %}
+                                        <a href="{{ speaker.linkedin }}" target="_blank" rel="noopener noreferrer" class="speaker-link">
+                                            {{ speaker.firstName }} {{ speaker.lastName }}
+                                        </a>{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <!-- Template element for client-side rendering -->
+            <template id="talk-template">
+                <article class="talk-card">
+                    <div class="time"></div>
+                    <div class="talk-content">
+                        <span class="category-badge"></span>
+                        <h3 class="talk-title"></h3>
+                        <p class="description"></p>
+                        <div class="speakers">
+                            <strong>Speakers:</strong>
+                            <span class="speaker-list"></span>
+                        </div>
+                    </div>
+                </article>
+            </template>
+            <template id="break-template">
+                <article class="talk-card break-card">
+                    <div class="time"></div>
+                    <div class="talk-content">
+                        <h3></h3>
+                        <p class="description"></p>
+                    </div>
+                </article>
+            </template>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 Google Cloud Technologies Conference. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
