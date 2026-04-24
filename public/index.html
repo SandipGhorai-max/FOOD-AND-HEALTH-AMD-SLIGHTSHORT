@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NourishAI - An intelligent web application designed to help you make better food choices and build sustainable healthy eating habits.">
+  <title>NourishAI - Smart Eating</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Accessibility skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header role="banner" class="app-header">
+    <div class="header-container">
+      <h1 class="logo">NourishAI <span class="leaf" aria-hidden="true">🌿</span></h1>
+      <div class="user-stats" aria-live="polite" aria-atomic="true">
+        <span class="points" id="user-points" aria-label="Reward points">🪙 0</span>
+        <span class="streak" id="user-streak" aria-label="Current healthy eating streak">🔥 0 Days</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main" class="app-main" tabindex="-1">
+    <section class="context-banner" id="context-banner" aria-live="polite" aria-label="Daily Context Information">
+      <p>Loading your personalized context...</p>
+    </section>
+
+    <section class="action-panel" aria-labelledby="log-meal-heading">
+      <h2 id="log-meal-heading">Log Your Meal</h2>
+      <form id="log-meal-form" aria-label="Log Meal Form">
+        <div class="input-group">
+          <label for="meal-name">What did you eat?</label>
+          <input type="text" id="meal-name" name="meal-name" required placeholder="e.g., Grilled Salmon Salad" aria-required="true">
+        </div>
+        <div class="input-group checkbox-group">
+          <input type="checkbox" id="is-healthy" name="is-healthy" checked aria-checked="true">
+          <label for="is-healthy">This was a healthy choice</label>
+        </div>
+        <button type="submit" class="btn-primary" aria-label="Submit meal log">Log Meal</button>
+      </form>
+      <div id="feedback-message" class="feedback-msg hidden" aria-live="assertive" role="alert"></div>
+    </section>
+
+    <section class="recommendations-section" aria-labelledby="recommendation-heading">
+      <h2 id="recommendation-heading">Suggested For You Right Now</h2>
+      <div id="recommendation-list" class="card-grid" aria-live="polite" aria-relevant="additions">
+        <!-- Recommendations dynamically populated -->
+      </div>
+    </section>
+
+    <section class="nearby-section" aria-labelledby="nearby-heading">
+      <h2 id="nearby-heading">Nearby Healthy Options</h2>
+      <div id="nearby-list" class="card-grid" aria-live="polite" aria-relevant="additions">
+        <!-- Nearby places dynamically populated -->
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="app-footer">
+    <p>&copy; 2026 NourishAI. Building sustainable habits together.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

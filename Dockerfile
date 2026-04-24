@@ -1,20 +1,23 @@
-# Use official Python runtime as a parent image
-FROM python:3.11-slim
+FROM node:18-alpine
 
-# Set the working directory to /app
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-# Copy requirements.txt first to leverage Docker cache
-COPY requirements.txt .
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN npm ci --only=production
 
-# Copy the current directory contents into the container at /app
-COPY . .
+# Bundle app source
+COPY src/ ./src/
+COPY public/ ./public/
 
-# Expose port 8080 (Cloud Run default)
+# Expose port and start application
 EXPOSE 8080
+ENV PORT=8080
 
-# Run gunicorn server with Flask app
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "8", "--timeout", "0", "app:app"]
+# Hardening for Cloud Run
+ENV NODE_ENV=production
+
+CMD [ "node", "src/server.js" ]
