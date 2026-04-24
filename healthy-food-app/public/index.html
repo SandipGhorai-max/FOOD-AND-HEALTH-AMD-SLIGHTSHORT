@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Intelligent Food Habit & Recommendation App">
+  <title>NourishAI - Smart Eating</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header role="banner" class="app-header">
+    <div class="header-container">
+      <h1 class="logo">NourishAI <span class="leaf">🌿</span></h1>
+      <div class="user-stats" aria-live="polite">
+        <span class="points" id="user-points">🪙 0</span>
+        <span class="streak" id="user-streak">🔥 0 Days</span>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" class="app-main">
+    <section class="context-banner" id="context-banner" aria-live="polite">
+      <!-- Context nudges will appear here -->
+      <p>Loading your personalized context...</p>
+    </section>
+
+    <section class="action-panel">
+      <h2>Log Your Meal</h2>
+      <form id="log-meal-form" aria-label="Log Meal Form">
+        <div class="input-group">
+          <label for="meal-name">What did you eat?</label>
+          <input type="text" id="meal-name" name="meal-name" required placeholder="e.g., Grilled Salmon Salad" aria-required="true">
+        </div>
+        <div class="input-group checkbox-group">
+          <input type="checkbox" id="is-healthy" name="is-healthy" checked>
+          <label for="is-healthy">This was a healthy choice</label>
+        </div>
+        <button type="submit" class="btn-primary">Log Meal</button>
+      </form>
+      <div id="feedback-message" class="feedback-msg hidden" aria-live="assertive"></div>
+    </section>
+
+    <section class="recommendations-section">
+      <h2>Suggested For You Right Now</h2>
+      <div id="recommendation-list" class="card-grid" aria-live="polite">
+        <!-- Recommendations dynamically populated -->
+      </div>
+    </section>
+
+    <section class="nearby-section">
+      <h2>Nearby Healthy Options</h2>
+      <div id="nearby-list" class="card-grid" aria-live="polite">
+        <!-- Nearby places dynamically populated -->
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="app-footer">
+    <p>&copy; 2026 NourishAI. Building sustainable habits together.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
